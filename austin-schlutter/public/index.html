@@ -10,54 +10,89 @@
 
   <div id="desktop">
 
-    <!-- Menu Bar -->
-    <div id="menu-bar">
-      <div class="menu-left">
-        <span class="menu-logo">&#63743;</span>
-        <span class="menu-item active" data-window="about">About</span>
-        <span class="menu-item" data-window="projects">Projects</span>
-        <span class="menu-item" data-window="skills">Skills</span>
-        <span class="menu-item" data-window="contact">Contact</span>
-      </div>
-      <div class="menu-right">
-        <span id="menu-clock"></span>
-      </div>
-    </div>
-
-    <!-- Desktop Icons (right column) -->
+    <!-- Desktop Icons (left column) -->
     <div id="desktop-icons">
       <div class="desktop-icon" data-window="about">
-        <div class="icon-img">&#128100;</div>
-        <span>About.me</span>
+        <img class="icon-img" src="icons/about.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
+        <span class="icon-emoji" style="display:none">👤</span>
+        <span>About Me</span>
       </div>
       <div class="desktop-icon" data-window="projects">
-        <div class="icon-img">&#128193;</div>
-        <span>Projects</span>
+        <img class="icon-img" src="icons/projects.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
+        <span class="icon-emoji" style="display:none">📁</span>
+        <span>My Projects</span>
       </div>
       <div class="desktop-icon" data-window="skills">
-        <div class="icon-img">&#9881;</div>
+        <img class="icon-img" src="icons/skills.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
+        <span class="icon-emoji" style="display:none">⚙️</span>
         <span>Skills.txt</span>
       </div>
       <div class="desktop-icon" data-window="resume">
-        <div class="icon-img">&#128196;</div>
+        <img class="icon-img" src="icons/resume.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
+        <span class="icon-emoji" style="display:none">📄</span>
         <span>Resume.pdf</span>
       </div>
       <div class="desktop-icon" data-window="contact">
-        <div class="icon-img">&#9993;</div>
+        <img class="icon-img" src="icons/contact.png" onerror="this.style.display='none';this.nextElementSibling.style.display='block'" />
+        <span class="icon-emoji" style="display:none">✉️</span>
         <span>Contact</span>
+      </div>
+      <div class="desktop-icon" id="recycle-bin">
+        <span class="icon-emoji">🗑️</span>
+        <span>Recycle Bin</span>
       </div>
     </div>
 
     <!-- Windows Container -->
     <div id="windows-container"></div>
 
-    <!-- Dock -->
-    <div id="dock">
-      <div class="dock-item" data-window="about" title="About">&#128100;</div>
-      <div class="dock-item" data-window="projects" title="Projects">&#128193;</div>
-      <div class="dock-item" data-window="skills" title="Skills">&#9881;</div>
-      <div class="dock-item" data-window="resume" title="Resume">&#128196;</div>
-      <div class="dock-item" data-window="contact" title="Contact">&#9993;</div>
+    <!-- Taskbar -->
+    <div id="taskbar">
+      <button id="start-btn" onclick="toggleStartMenu()">
+        <span class="start-logo">⊞</span>
+        <span>Start</span>
+      </button>
+
+      <div class="taskbar-divider"></div>
+
+      <!-- Open window buttons appear here -->
+      <div id="taskbar-windows"></div>
+
+      <!-- System Tray -->
+      <div id="system-tray">
+        <span class="tray-icon">🔊</span>
+        <span class="tray-icon">🌐</span>
+        <div class="tray-divider"></div>
+        <span id="taskbar-clock"></span>
+      </div>
+    </div>
+
+    <!-- Start Menu -->
+    <div id="start-menu" class="hidden">
+      <div class="start-sidebar">
+        <span>Austin Schlutter</span>
+      </div>
+      <div class="start-items">
+        <div class="start-item" data-window="about">
+          <span>👤</span> About Me
+        </div>
+        <div class="start-item" data-window="projects">
+          <span>📁</span> My Projects
+        </div>
+        <div class="start-item" data-window="skills">
+          <span>⚙️</span> Skills.txt
+        </div>
+        <div class="start-item" data-window="resume">
+          <span>📄</span> Resume.pdf
+        </div>
+        <div class="start-item" data-window="contact">
+          <span>✉️</span> Contact
+        </div>
+        <div class="start-separator"></div>
+        <div class="start-item" id="shutdown-btn">
+          <span>🔌</span> Shut Down...
+        </div>
+      </div>
     </div>
 
   </div>

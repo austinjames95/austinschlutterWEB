@@ -1,100 +1,120 @@
-// ── Window Content ────────────────────────────────────────────────────────────
-// Edit these objects to fill in your actual portfolio content.
+// ── Window Definitions ────────────────────────────────────────────────────────
 
 const WINDOWS = {
   about: {
     title: "About Me",
+    icon: "👤",
+    status: "Austin Schlutter — Portfolio",
     width: 480,
     height: 360,
+    menu: ["File", "Edit", "View", "Help"],
     content: `
-      <h1>Hi, I'm Austin Schlutter 👋</h1>
-      <p>I'm a [your role, e.g. "software developer and CS student"] based in [your location].</p>
-      <p>I love building things for the web and exploring new technologies. When I'm not coding
-         I'm probably [your hobby].</p>
-      <h2>Background</h2>
-      <p>[A sentence or two about your education or experience.]</p>
+      <h1>👤 About Me</h1>
+      <p><strong>Austin Schlutter</strong> — [your role, e.g. Software Developer & CS Student]</p>
+      <p>Based in [your city]. I love building things for the web and exploring new technologies.
+         When I'm not coding I'm probably [your hobby].</p>
+      <h2>Education</h2>
+      <p>[Your school, degree, expected graduation year]</p>
+      <h2>Experience</h2>
+      <p>[A sentence about any internships, jobs, or relevant experience you have.]</p>
+      <h2>Interests</h2>
+      <p>[What excites you in tech — e.g., web dev, AI, game dev, open source, etc.]</p>
     `,
   },
 
   projects: {
-    title: "Projects",
-    width: 520,
-    height: 440,
+    title: "My Projects",
+    icon: "📁",
+    status: "5 objects",
+    width: 540,
+    height: 460,
+    menu: ["File", "Edit", "View", "Favorites", "Help"],
     content: `
-      <h1>Projects</h1>
+      <h1>📁 My Projects</h1>
       <div class="project-card">
-        <h3>Project Name</h3>
-        <p>Short description of what this project does and why you built it.</p>
+        <h3>📄 Project Name</h3>
+        <p>Short description of what this project does and the problem it solves.</p>
         <span class="tag">JavaScript</span>
         <span class="tag">HTML/CSS</span>
-        <a href="#">GitHub →</a>
+        &nbsp;<a href="#">View on GitHub →</a>
       </div>
       <div class="project-card">
-        <h3>Another Project</h3>
-        <p>Short description of what this project does and why you built it.</p>
+        <h3>📄 Another Project</h3>
+        <p>Short description of what this project does and the problem it solves.</p>
         <span class="tag">Python</span>
-        <span class="tag">API</span>
-        <a href="#">GitHub →</a>
+        <span class="tag">Flask</span>
+        &nbsp;<a href="#">View on GitHub →</a>
       </div>
       <div class="project-card">
-        <h3>One More Project</h3>
-        <p>Short description of what this project does and why you built it.</p>
+        <h3>📄 One More Project</h3>
+        <p>Short description of what this project does and the problem it solves.</p>
         <span class="tag">React</span>
         <span class="tag">Node.js</span>
-        <a href="#">GitHub →</a>
+        &nbsp;<a href="#">View on GitHub →</a>
       </div>
     `,
   },
 
   skills: {
-    title: "Skills.txt",
+    title: "Skills.txt — Notepad",
+    icon: "📝",
+    status: "Ready",
     width: 400,
-    height: 320,
+    height: 340,
+    menu: ["File", "Edit", "Search", "Help"],
     content: `
-      <h1>Skills</h1>
+      <h1>Skills.txt</h1>
       <h2>Languages</h2>
       <div class="skills-grid">
         <div class="skill-pill">JavaScript</div>
         <div class="skill-pill">Python</div>
-        <div class="skill-pill">HTML/CSS</div>
+        <div class="skill-pill">HTML</div>
+        <div class="skill-pill">CSS</div>
         <div class="skill-pill">SQL</div>
+        <div class="skill-pill">Java</div>
       </div>
       <h2>Tools & Frameworks</h2>
       <div class="skills-grid">
         <div class="skill-pill">Git</div>
         <div class="skill-pill">Node.js</div>
+        <div class="skill-pill">React</div>
         <div class="skill-pill">VS Code</div>
         <div class="skill-pill">Figma</div>
+        <div class="skill-pill">Linux</div>
       </div>
     `,
   },
 
   resume: {
     title: "Resume.pdf",
-    width: 420,
-    height: 260,
+    icon: "📄",
+    status: "1 document",
+    width: 380,
+    height: 240,
+    menu: ["File", "View", "Help"],
     content: `
-      <h1>Resume</h1>
-      <p>View or download my full resume below.</p>
+      <h1>📄 Resume</h1>
+      <p>Click below to open or download my full resume.</p>
       <a class="contact-link" href="resume.pdf" target="_blank">
         <span class="contact-icon">📄</span>
         Open Resume PDF
       </a>
-      <p style="font-size:12px; color:#888; margin-top:8px;">
-        Last updated: April 2026
-      </p>
+      <p style="font-size:11px; color:#666; margin-top:8px;">Last updated: April 2026</p>
     `,
   },
 
   contact: {
     title: "Contact",
-    width: 420,
-    height: 320,
+    icon: "✉️",
+    status: "3 items",
+    width: 400,
+    height: 300,
+    menu: ["File", "Edit", "Help"],
     content: `
-      <h1>Get in Touch</h1>
-      <p>I'm always open to new opportunities and conversations.</p>
+      <h1>✉️ Contact</h1>
+      <p>Feel free to reach out — I'd love to connect!</p>
       <a class="contact-link" href="mailto:austinschlutter@gmail.com">
-        <span class="contact-icon">✉️</span>
+        <span class="contact-icon">📧</span>
         austinschlutter@gmail.com
       </a>
       <a class="contact-link" href="https://github.com/AustinSchlutter" target="_blank">
@@ -113,23 +133,26 @@ const WINDOWS = {
 // ── State ─────────────────────────────────────────────────────────────────────
 
 const state = {
-  openWindows: {},  // id → { el, minimized }
+  openWindows: {},  // id → { el, minimized, taskbarBtn }
   zCounter: 100,
+  focusedId: null,
 };
 
 
-// ── Window Management ─────────────────────────────────────────────────────────
+// ── Window Open / Close / Minimize / Focus ───────────────────────────────────
 
 function openWindow(id) {
   const def = WINDOWS[id];
   if (!def) return;
 
-  // If already open and not minimized, just focus it
+  closeStartMenu();
+
   if (state.openWindows[id]) {
     const entry = state.openWindows[id];
     if (entry.minimized) {
-      entry.el.classList.remove("minimized");
+      entry.el.style.display = "flex";
       entry.minimized = false;
+      entry.taskbarBtn.classList.remove("active");
     }
     focusWindow(id);
     return;
@@ -137,35 +160,45 @@ function openWindow(id) {
 
   const el = buildWindowEl(id, def);
 
-  // Default position: slightly randomized center
+  // Position: slightly randomized center
   const vw = window.innerWidth;
   const vh = window.innerHeight;
-  const left = Math.max(60, (vw - def.width) / 2 + (Math.random() - 0.5) * 120);
-  const top  = Math.max(40, (vh - def.height) / 2 + (Math.random() - 0.5) * 80);
-  el.style.left   = left + "px";
-  el.style.top    = top  + "px";
+  const left = Math.max(10, (vw - def.width) / 2 + (Math.random() - 0.5) * 160);
+  const top  = Math.max(4,  (vh - def.height - 28) / 2 + (Math.random() - 0.5) * 100);
+  el.style.left   = Math.round(left) + "px";
+  el.style.top    = Math.round(top)  + "px";
   el.style.width  = def.width  + "px";
   el.style.height = def.height + "px";
 
   document.getElementById("windows-container").appendChild(el);
-  state.openWindows[id] = { el, minimized: false };
+
+  // Taskbar button
+  const btn = buildTaskbarBtn(id, def);
+  document.getElementById("taskbar-windows").appendChild(btn);
+
+  state.openWindows[id] = { el, minimized: false, taskbarBtn: btn };
   focusWindow(id);
-  updateDockDots();
 }
 
 function closeWindow(id) {
   const entry = state.openWindows[id];
   if (!entry) return;
   entry.el.remove();
+  entry.taskbarBtn.remove();
   delete state.openWindows[id];
-  updateDockDots();
+  if (state.focusedId === id) state.focusedId = null;
 }
 
 function minimizeWindow(id) {
   const entry = state.openWindows[id];
   if (!entry) return;
-  entry.el.classList.add("minimized");
+  entry.el.style.display = "none";
   entry.minimized = true;
+  entry.taskbarBtn.classList.add("active");
+  // Focus the next available window
+  const others = Object.keys(state.openWindows).filter(k => k !== id && !state.openWindows[k].minimized);
+  if (others.length) focusWindow(others[others.length - 1]);
+  else state.focusedId = null;
 }
 
 function focusWindow(id) {
@@ -173,9 +206,12 @@ function focusWindow(id) {
   if (!entry) return;
   state.zCounter++;
   entry.el.style.zIndex = state.zCounter;
-  // Remove focused class from all windows, add to this one
-  Object.values(state.openWindows).forEach(e => e.el.classList.remove("focused"));
-  entry.el.classList.add("focused");
+  // Update title bar active state
+  Object.entries(state.openWindows).forEach(([wid, e]) => {
+    e.el.querySelector(".window-titlebar").classList.toggle("inactive", wid !== id);
+    e.taskbarBtn.classList.toggle("active", wid === id);
+  });
+  state.focusedId = id;
 }
 
 
@@ -186,39 +222,64 @@ function buildWindowEl(id, def) {
   win.className = "window";
   win.dataset.id = id;
 
+  const menuHtml = (def.menu || [])
+    .map(m => `<span class="menu-entry">${m}</span>`).join("");
+
   win.innerHTML = `
     <div class="window-titlebar">
-      <div class="traffic-lights">
-        <div class="tl tl-close"  data-action="close"></div>
-        <div class="tl tl-min"    data-action="minimize"></div>
-        <div class="tl tl-max"    data-action="maximize"></div>
+      <span class="window-title-icon">${def.icon || "📄"}</span>
+      <span class="window-title">${def.title}</span>
+      <div class="win-controls">
+        <button class="wc-btn wc-min"  title="Minimize">_</button>
+        <button class="wc-btn wc-max"  title="Maximize">□</button>
+        <button class="wc-btn wc-close" title="Close" style="margin-left:2px">✕</button>
       </div>
-      <div class="window-title">${def.title}</div>
     </div>
+    <div class="window-menubar">${menuHtml}</div>
     <div class="window-content">${def.content}</div>
+    <div class="window-statusbar">${def.status || "Ready"}</div>
   `;
 
-  // Traffic light buttons
-  win.querySelector(".tl-close").addEventListener("click", (e) => {
+  win.querySelector(".wc-close").addEventListener("click", (e) => {
     e.stopPropagation();
     closeWindow(id);
   });
-  win.querySelector(".tl-min").addEventListener("click", (e) => {
+  win.querySelector(".wc-min").addEventListener("click", (e) => {
     e.stopPropagation();
     minimizeWindow(id);
   });
-  win.querySelector(".tl-max").addEventListener("click", (e) => {
+  win.querySelector(".wc-max").addEventListener("click", (e) => {
     e.stopPropagation();
     toggleMaximize(win);
   });
 
-  // Focus on click anywhere in window
   win.addEventListener("mousedown", () => focusWindow(id));
-
-  // Drag logic
   makeDraggable(win, win.querySelector(".window-titlebar"));
 
   return win;
+}
+
+
+// ── Taskbar Button ────────────────────────────────────────────────────────────
+
+function buildTaskbarBtn(id, def) {
+  const btn = document.createElement("button");
+  btn.className = "taskbar-window-btn";
+  btn.innerHTML = `<span>${def.icon}</span> ${def.title}`;
+  btn.addEventListener("click", () => {
+    const entry = state.openWindows[id];
+    if (!entry) return;
+    if (entry.minimized) {
+      entry.el.style.display = "flex";
+      entry.minimized = false;
+      focusWindow(id);
+    } else if (state.focusedId === id) {
+      minimizeWindow(id);
+    } else {
+      focusWindow(id);
+    }
+  });
+  return btn;
 }
 
 
@@ -228,23 +289,20 @@ function makeDraggable(win, handle) {
   let startX, startY, startLeft, startTop;
 
   handle.addEventListener("mousedown", (e) => {
-    // Don't drag when clicking traffic lights
-    if (e.target.classList.contains("tl")) return;
-
+    if (e.target.classList.contains("wc-btn")) return;
+    if (win.dataset.maximized === "true") return;
     e.preventDefault();
+
     startX    = e.clientX;
     startY    = e.clientY;
     startLeft = parseInt(win.style.left, 10) || 0;
     startTop  = parseInt(win.style.top,  10) || 0;
 
     const onMove = (e) => {
-      const dx = e.clientX - startX;
-      const dy = e.clientY - startY;
-      const menuH = 28;
-      const newTop  = Math.max(menuH, startTop  + dy);
-      const newLeft = Math.max(0,     startLeft + dx);
-      win.style.top  = newTop  + "px";
+      const newLeft = Math.max(0, startLeft + (e.clientX - startX));
+      const newTop  = Math.max(0, startTop  + (e.clientY - startY));
       win.style.left = newLeft + "px";
+      win.style.top  = newTop  + "px";
     };
 
     const onUp = () => {
@@ -258,7 +316,7 @@ function makeDraggable(win, handle) {
 }
 
 
-// ── Maximize Toggle ───────────────────────────────────────────────────────────
+// ── Maximize ──────────────────────────────────────────────────────────────────
 
 function toggleMaximize(win) {
   if (win.dataset.maximized === "true") {
@@ -272,52 +330,116 @@ function toggleMaximize(win) {
     win.dataset.prevTop    = win.style.top;
     win.dataset.prevWidth  = win.style.width;
     win.dataset.prevHeight = win.style.height;
-    const menuH = 28;
-    const dockH = 104;
+    const taskbarH = 28;
     win.style.left   = "0px";
-    win.style.top    = menuH + "px";
+    win.style.top    = "0px";
     win.style.width  = window.innerWidth + "px";
-    win.style.height = (window.innerHeight - menuH - dockH) + "px";
+    win.style.height = (window.innerHeight - taskbarH) + "px";
     win.dataset.maximized = "true";
   }
 }
 
 
-// ── Dock Dots ─────────────────────────────────────────────────────────────────
+// ── Start Menu ────────────────────────────────────────────────────────────────
 
-function updateDockDots() {
-  document.querySelectorAll(".dock-item").forEach((item) => {
-    const id = item.dataset.window;
-    const isOpen = !!state.openWindows[id];
-    item.classList.toggle("open", isOpen);
-  });
+function toggleStartMenu() {
+  const menu = document.getElementById("start-menu");
+  const btn  = document.getElementById("start-btn");
+  const isOpen = !menu.classList.contains("hidden");
+  menu.classList.toggle("hidden", isOpen);
+  btn.classList.toggle("active", !isOpen);
 }
 
+function closeStartMenu() {
+  document.getElementById("start-menu").classList.add("hidden");
+  document.getElementById("start-btn").classList.remove("active");
+}
 
-// ── Menu Bar Clock ────────────────────────────────────────────────────────────
+// Close start menu when clicking elsewhere
+document.addEventListener("mousedown", (e) => {
+  if (!e.target.closest("#start-menu") && !e.target.closest("#start-btn")) {
+    closeStartMenu();
+  }
+});
+
+
+// ── Shutdown Dialog ───────────────────────────────────────────────────────────
+
+function showShutdown() {
+  closeStartMenu();
+  let overlay = document.getElementById("shutdown-overlay");
+  if (!overlay) {
+    overlay = document.createElement("div");
+    overlay.id = "shutdown-overlay";
+    overlay.innerHTML = `
+      <div class="shutdown-dialog">
+        <div class="shutdown-titlebar">
+          <span>Shut Down Windows</span>
+          <button class="wc-btn" onclick="document.getElementById('shutdown-overlay').classList.remove('visible')" style="width:14px;height:12px;font-size:9px">✕</button>
+        </div>
+        <div class="shutdown-body">
+          <span class="icon">💻</span>
+          <div>
+            <p><strong>Are you sure you want to shut down?</strong></p>
+            <p>Austin Schlutter OS v1.0</p>
+          </div>
+        </div>
+        <div class="shutdown-buttons">
+          <button class="dialog-btn" onclick="document.getElementById('shutdown-overlay').classList.remove('visible')">Cancel</button>
+          <button class="dialog-btn" onclick="window.close()">OK</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+  }
+  overlay.classList.add("visible");
+}
+
+document.getElementById("shutdown-btn").addEventListener("click", showShutdown);
+
+
+// ── Clock ─────────────────────────────────────────────────────────────────────
 
 function updateClock() {
-  const now = new Date();
-  const opts = { weekday: "short", month: "short", day: "numeric",
-                 hour: "numeric", minute: "2-digit" };
-  document.getElementById("menu-clock").textContent =
-    now.toLocaleString("en-US", opts);
+  const now  = new Date();
+  const h    = now.getHours();
+  const m    = String(now.getMinutes()).padStart(2, "0");
+  const ampm = h >= 12 ? "PM" : "AM";
+  const h12  = h % 12 || 12;
+  document.getElementById("taskbar-clock").textContent = `${h12}:${m} ${ampm}`;
 }
 
 setInterval(updateClock, 1000);
 updateClock();
 
 
-// ── Wire Up Clicks ────────────────────────────────────────────────────────────
+// ── Wire Up All [data-window] Clicks ─────────────────────────────────────────
 
 document.querySelectorAll("[data-window]").forEach((el) => {
-  el.addEventListener("click", () => openWindow(el.dataset.window));
-  if (el.classList.contains("menu-item")) {
-    el.addEventListener("click", () => {
-      document.querySelectorAll(".menu-item").forEach(m => m.classList.remove("active"));
-      el.classList.add("active");
-    });
+  el.addEventListener("dblclick", () => openWindow(el.dataset.window));
+  // Desktop icons open on double-click; start menu items on single click
+  if (el.classList.contains("start-item")) {
+    el.addEventListener("click", () => openWindow(el.dataset.window));
   }
+});
+
+// Desktop icon single-click = select
+document.querySelectorAll(".desktop-icon").forEach((icon) => {
+  icon.addEventListener("click", (e) => {
+    document.querySelectorAll(".desktop-icon").forEach(i => i.classList.remove("selected"));
+    icon.classList.add("selected");
+    e.stopPropagation();
+  });
+});
+
+// Click desktop = deselect icons
+document.getElementById("desktop").addEventListener("click", () => {
+  document.querySelectorAll(".desktop-icon").forEach(i => i.classList.remove("selected"));
+});
+
+// Menu bar items open windows
+document.querySelectorAll(".menu-item[data-window]").forEach((el) => {
+  el.addEventListener("click", () => openWindow(el.dataset.window));
 });
 
 

@@ -1,0 +1,31 @@
+@keyframes appear {
+    from {
+        opacity: 0;
+        scale: 0.5;
+    }
+    to {
+        opacity: 1;
+        scale: 1;
+    }
+}
+
+* {
+    font-family: "Baloo Bhaijaan 2", cursive !important;
+}
+
+body {
+    background-color: #F4F5F1;
+}
+
+.computer-button {
+    background: transparent;
+    border: none !important;
+    font-size: 0;
+}
+
+.computer-image {
+    display: block;
+    margin: auto;
+    max-width: fit-content;
+    
+}
