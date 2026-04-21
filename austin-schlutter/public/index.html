@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Austin Schlutter</title>
+  <link rel="stylesheet" href="./src/style/style.css" />
+</head>
+<body>
+
+  <div id="desktop">
+
+    <!-- Menu Bar -->
+    <div id="menu-bar">
+      <div class="menu-left">
+        <span class="menu-logo">&#63743;</span>
+        <span class="menu-item active" data-window="about">About</span>
+        <span class="menu-item" data-window="projects">Projects</span>
+        <span class="menu-item" data-window="skills">Skills</span>
+        <span class="menu-item" data-window="contact">Contact</span>
+      </div>
+      <div class="menu-right">
+        <span id="menu-clock"></span>
+      </div>
+    </div>
+
+    <!-- Desktop Icons (right column) -->
+    <div id="desktop-icons">
+      <div class="desktop-icon" data-window="about">
+        <div class="icon-img">&#128100;</div>
+        <span>About.me</span>
+      </div>
+      <div class="desktop-icon" data-window="projects">
+        <div class="icon-img">&#128193;</div>
+        <span>Projects</span>
+      </div>
+      <div class="desktop-icon" data-window="skills">
+        <div class="icon-img">&#9881;</div>
+        <span>Skills.txt</span>
+      </div>
+      <div class="desktop-icon" data-window="resume">
+        <div class="icon-img">&#128196;</div>
+        <span>Resume.pdf</span>
+      </div>
+      <div class="desktop-icon" data-window="contact">
+        <div class="icon-img">&#9993;</div>
+        <span>Contact</span>
+      </div>
+    </div>
+
+    <!-- Windows Container -->
+    <div id="windows-container"></div>
+
+    <!-- Dock -->
+    <div id="dock">
+      <div class="dock-item" data-window="about" title="About">&#128100;</div>
+      <div class="dock-item" data-window="projects" title="Projects">&#128193;</div>
+      <div class="dock-item" data-window="skills" title="Skills">&#9881;</div>
+      <div class="dock-item" data-window="resume" title="Resume">&#128196;</div>
+      <div class="dock-item" data-window="contact" title="Contact">&#9993;</div>
+    </div>
+
+  </div>
+
+  <script src="./src/app.js"></script>
+</body>
+</html>
