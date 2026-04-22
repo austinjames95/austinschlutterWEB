@@ -4,9 +4,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Austin Schlutter</title>
-    <link rel="stylesheet" href="./src/style/style.css" />
-    <body>
-        
-    </body>
+    <link rel="stylesheet" href="./src/style/home.css" />
 </head>
+<body>
+
+    <div class="landing-container">
+        <p class="name-text">Austin Schlutter</p>
+
+        <div class="computer-wrapper">
+            <img src="./images/transparentHomeComputer.png" alt="Home Computer" class="computer-image" />
+            <button class="power-button" onclick="powerOn()" aria-label="Power On"></button>
+        </div>
+
+        <p class="hint-text">press power to boot</p>
+    </div>
+
+    <div class="screen-zoom "></div> <!-- IMPLEMENT THIS -->
+
+    <script>
+        function powerOn() {
+            const flash = document.querySelector('.screen-flash');
+            flash.classList.add('active');
+            setTimeout(() => {
+                window.location.href = './index.html';
+            }, 450);
+        }
+    </script>
+
+</body>
 </html>

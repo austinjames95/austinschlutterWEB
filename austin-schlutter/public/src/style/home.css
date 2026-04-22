@@ -1,31 +1,103 @@
 @keyframes appear {
-    from {
-        opacity: 0;
-        scale: 0.5;
-    }
-    to {
-        opacity: 1;
-        scale: 1;
-    }
+    from { opacity: 0; transform: scale(0.95); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 6px 2px rgba(60, 130, 255, 0.5), 0 0 16px 4px rgba(60, 130, 255, 0.25); }
+    50%       { box-shadow: 0 0 12px 4px rgba(60, 130, 255, 0.85), 0 0 28px 8px rgba(60, 130, 255, 0.45); }
+}
+
+@keyframes fade-float {
+    0%, 100% { opacity: 0.35; transform: translateY(0); }
+    50%       { opacity: 0.7;  transform: translateY(-3px); }
+}
+
+@font-face {
+    font-family: techno;
+    src: url(./font/Techno_Nue-Medium-iF66cd84748c9a9.otf);
 }
 
 * {
-    font-family: "Baloo Bhaijaan 2", cursive !important;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: techno
 }
 
 body {
-    background-color: #F4F5F1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(ellipse at 50% 60%, #1b1b2e 0%, #0a0a14 70%);
+    overflow: hidden;
 }
 
-.computer-button {
-    background: transparent;
-    border: none !important;
-    font-size: 0;
+/* ── Landing layout ─────────────────────────────────────── */
+.landing-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    animation: appear 0.9s ease-out both;
+}
+
+.name-text {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: clamp(14px, 2vw, 20px);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 300;
+}
+
+/* ── Computer image + power button overlay ──────────────── */
+.computer-wrapper {
+    position: relative;
+    display: inline-block;
 }
 
 .computer-image {
     display: block;
-    margin: auto;
-    max-width: fit-content;
-    
+    max-height: 78vh;
+    max-width: 90vw;
+    width: auto;
+    filter: drop-shadow(0 24px 60px rgba(20, 60, 180, 0.18));
 }
+
+/*
+  Positioned to overlay the blue power button visible in the
+  bottom-right corner of the tower case (approx 87% from left,
+  90% from top in the source image).
+*/
+.power-button {
+    position: absolute;
+    bottom: 7%;
+    right: 11%;
+    width: 5.5%;
+    height: 3%;
+    background: transparent;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    animation: pulse-glow 2s ease-in-out infinite;
+    transition: transform 0.12s ease;
+}
+
+.power-button:hover {
+    transform: scale(1.15);
+}
+
+.power-button:active {
+    transform: scale(0.92);
+}
+
+/* ── Hint text ──────────────────────────────────────────── */
+.hint-text {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: clamp(11px, 1.4vw, 14px);
+    letter-spacing: 3px;
+    text-transform: lowercase;
+    animation: fade-float 3s ease-in-out infinite;
+}
+
