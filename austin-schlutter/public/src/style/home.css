@@ -13,6 +13,21 @@
     50%       { opacity: 0.7;  transform: translateY(-3px); }
 }
 
+@keyframes zoomOut {
+    0% { opacity: 1 }
+    30% {
+        opacity: 0.9;
+        transform: scale3d(.7, .7, .7)
+    }
+}
+
+@keyframes zoomIn {
+    0% { opacity: 1 }
+    30% {
+        opacity: 1;
+        transform: scale3d(2.5, 2.5, 2.5)
+    }
+}
 @font-face {
     font-family: techno;
     src: url(./font/Techno_Nue-Medium-iF66cd84748c9a9.otf);
@@ -30,7 +45,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: radial-gradient(ellipse at 50% 60%, #1b1b2e 0%, #0a0a14 70%);
+    background: black;
     overflow: hidden;
 }
 
@@ -62,7 +77,6 @@ body {
     max-height: 78vh;
     max-width: 90vw;
     width: auto;
-    filter: drop-shadow(0 24px 60px rgba(20, 60, 180, 0.18));
 }
 
 /*
@@ -90,6 +104,30 @@ body {
 
 .power-button:active {
     transform: scale(0.92);
+}
+
+/* ── Screen zoom overlay ────────────────────────────────── */
+.screen-zoom-in {
+    position: relative;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transform: scale(0);
+    transform-origin: 50% 38%;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 1, 1);
+    animation: zoomIn 3s;
+    z-index: 100;
+    pointer-events: none;
+}
+
+.screen-zoom-out {
+    position: static;
+    animation: zoomOut 2s;
+}
+
+.screen-zoom-in.active {
+    position: static;
+    animation: zoomIn 3s;
 }
 
 /* ── Hint text ──────────────────────────────────────────── */
