@@ -1,14 +1,11 @@
 function powerOn() {
     const landing = document.querySelector('.landing-container');
-    const modalIn = document.querySelector('.screen-zoom-in');
 
-    landing.classList.add('screen-zoom-out');
+    // Triggers: brief zoom-out (pull back), then zoom-in toward the
+    // computer's screen so the CRT fills the viewport before navigating.
+    landing.classList.add('boot-zoom');
 
     setTimeout(() => {
-        modalIn.classList.add('active');
-        
-        setTimeout(() => {
-            window.location.href = '../index.html';
-        }, 1000);
-    }, 500);
+        window.location.href = '../index.html';
+    }, 2100);
 }
