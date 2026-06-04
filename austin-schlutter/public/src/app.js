@@ -105,24 +105,24 @@ const WINDOWS = {
 
   contact: {
     title: "Contact",
-    icon: "✉️",
+    icon: '<img src="../images/envelope_closed-0.png" width=14px>',
     status: "3 items",
     width: 400,
     height: 300,
     menu: ["File", "Edit", "Help"],
     content: `
-      <h1>✉️ Contact</h1>
-      <p>Feel free to reach out — I'd love to connect!</p>
+      <h1><img src="../images/envelope_closed-0.png" width=15px> Contact</h1>
+      <p>Feel free to reach out! I'd love to connect!</p>
       <a class="contact-link" href="mailto:austinschlutter@gmail.com">
-        <span class="contact-icon">📧</span>
+        <span class="contact-icon"><img src="../images/modem-4.png" width=14px></span>
         austinschlutter@gmail.com
       </a>
-      <a class="contact-link" href="https://github.com/AustinSchlutter" target="_blank">
-        <span class="contact-icon">🐙</span>
+      <a class="contact-link" href="https://github.com/austinjames95" target="https://github.com/austinjames95">
+        <span class="contact-icon"><img src="../images/monitor_blue_grad-0.png" width=14px></span>
         github.com/AustinSchlutter
       </a>
-      <a class="contact-link" href="https://linkedin.com/in/yourprofile" target="_blank">
-        <span class="contact-icon">💼</span>
+      <a class="contact-link" href="https://linkedin.com/in/yourprofile" target="www.linkedin.com/in/austinschlutter">
+        <span class="contact-icon"><img src="../images/network_internet_pcs_installer-2.png" width=14px></span>
         linkedin.com/in/yourprofile
       </a>
     `,
