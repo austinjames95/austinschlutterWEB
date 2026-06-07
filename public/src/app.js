@@ -70,17 +70,14 @@ const WINDOWS = {
         <div class="skill-pill">Python</div>
         <div class="skill-pill">HTML</div>
         <div class="skill-pill">CSS</div>
-        <div class="skill-pill">SQL</div>
+        <div class="skill-pill">C++</div>
         <div class="skill-pill">Java</div>
       </div>
       <h2>Tools & Frameworks</h2>
       <div class="skills-grid">
         <div class="skill-pill">Git</div>
         <div class="skill-pill">Node.js</div>
-        <div class="skill-pill">React</div>
         <div class="skill-pill">VS Code</div>
-        <div class="skill-pill">Figma</div>
-        <div class="skill-pill">Linux</div>
       </div>
     `,
   },
