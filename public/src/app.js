@@ -10,15 +10,22 @@ const WINDOWS = {
     menu: ["File", "Edit", "View", "Help"],
     content: `
       <h1><img src="../images/msagent-3.png" width="20px"> About Me</h1>
-      <p><strong>Austin Schlutter</strong> — [your role, e.g. Software Developer & CS Student]</p>
-      <p>Based in [your city]. I love building things for the web and exploring new technologies.
-         When I'm not coding I'm probably [your hobby].</p>
+      <p><strong>Austin Schlutter</strong> — An Electrical and Computer Engineering Junior at Rensselaer Polytechnic Institute</p>
+      <p>
+        Based out of Irvine CA, I have a strong passion for research, solving problems, and building. My hobbies include playing 
+        music (Bass / Electric Guitar), hiking, and boxing.
+      </p>
       <h2>Education</h2>
-      <p>[Your school, degree, expected graduation year]</p>
+      <p>[Rensselaer Polytechnic Institute, Electrical Engineering + Computer Systems Engineering, 2028</p>
       <h2>Experience</h2>
-      <p>[A sentence about any internships, jobs, or relevant experience you have.]</p>
+      <p>
+        Last year I took a position at City of Hope Cancer Research Center in Duarte California working on a research project analyzing
+        the reaction of a patients immune system (white blood cell count) to radiation treatment.
+
+        As for my more recent projects, please check out the <strong>Projects</strong> page for more information
+      </p>
       <h2>Interests</h2>
-      <p>[What excites you in tech — e.g., web dev, AI, game dev, open source, etc.]</p>
+      <p>Some of my tech interests include MedTech, Backend Development, Web Development, and Data Analysis</p>
     `,
   },
 
