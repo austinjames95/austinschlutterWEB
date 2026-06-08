@@ -3,13 +3,13 @@
 const WINDOWS = {
   about: {
     title: "About Me",
-    icon: "👤",
+    icon: '<img src="../images/msagent-3.png" width="12px">',
     status: "Austin Schlutter — Portfolio",
     width: 480,
     height: 360,
     menu: ["File", "Edit", "View", "Help"],
     content: `
-      <h1>👤 About Me</h1>
+      <h1><img src="../images/msagent-3.png" width="20px"> About Me</h1>
       <p><strong>Austin Schlutter</strong> — [your role, e.g. Software Developer & CS Student]</p>
       <p>Based in [your city]. I love building things for the web and exploring new technologies.
          When I'm not coding I'm probably [your hobby].</p>
@@ -32,32 +32,45 @@ const WINDOWS = {
     content: `
       <h1><img src="../images/directory_closed_cool-0.png" width="20px"> My Projects</h1>
       <div class="project-card">
-        <h3><img src="../images/file_lines-0.png" width="15px"> Project Name</h3>
-        <p>Short description of what this project does and the problem it solves.</p>
-        <span class="tag">JavaScript</span>
+        <h3><img src="../images/file_lines-0.png" width="15px"> EIT-tek</h3>
+        <p>
+          A company I started researching Electrical Impedance Tomography, an alternative form of medical imaging technology.
+          By utilizing my electrical engineering background I plan to build a device catered towards atheletes that can give athletic
+          trainers insight to the athletes injuries and recovery.
+        </p>
+        <span class="tag">Research</span>
+        <span class="tag">Embedded Hardware</span>
+        <span class="tag">MedTech</span>
+        &nbsp;<a href="https://www.eit-tek.com">View Website →</a>
+      </div>
+      <div class="project-card">
+        <h3><img src="../images/file_lines-0.png" width="15px"> tasteCampus</h3>
+        <p>
+          A platform for prospective families to connect with current students to gain unbiased insight and first hand experience
+          about universities, currently 
+        </p>
+        <span class="tag">Javascript</span>
         <span class="tag">HTML/CSS</span>
-        &nbsp;<a href="#">View on GitHub →</a>
+        <span class="tag">Stripe API</span>
+        <span class="tag">Customer Discovery</span>
+        &nbsp;<a href="https://www.tastecampus.com">View Website →</a>
       </div>
       <div class="project-card">
-        <h3><img src="../images/file_lines-0.png" width="15px"> Another Project</h3>
+        <h3><img src="../images/file_lines-0.png" width="15px"> SimplyEwaste</h3>
         <p>Short description of what this project does and the problem it solves.</p>
-        <span class="tag">Python</span>
-        <span class="tag">Flask</span>
-        &nbsp;<a href="#">View on GitHub →</a>
-      </div>
-      <div class="project-card">
-        <h3><img src="../images/file_lines-0.png" width="15px"> One More Project</h3>
-        <p>Short description of what this project does and the problem it solves.</p>
-        <span class="tag">React</span>
-        <span class="tag">Node.js</span>
-        &nbsp;<a href="#">View on GitHub →</a>
+        <div style=justify-content: center; > Note this project is no longer active</div>
+        <span class="tag">Charity</span>
+        <span class="tag">Leadership</span>
+        <span class="tag">Computer Hardware</span>
+        <span class="tag">Outreach</span>
+        &nbsp;<a href="https://www.simplyewaste.com">View Website →</a>
       </div>
     `,
   },
 
   skills: {
     title: "Skills.txt — Notepad",
-    icon: "📝",
+    icon: '<img src="../images/chip_ramdrive-2.png" width="12px">',
     status: "Ready",
     width: 400,
     height: 340,
@@ -84,7 +97,7 @@ const WINDOWS = {
 
   resume: {
     title: "Resume.pdf",
-    icon: "📄",
+    icon: '<img src="../images/file_lines-0.png" width="12px">',
     status: "1 document",
     width: 380,
     height: 240,
@@ -235,6 +248,14 @@ function buildWindowEl(id, def) {
     <div class="window-menubar">${menuHtml}</div>
     <div class="window-content">${def.content}</div>
     <div class="window-statusbar">${def.status || "Ready"}</div>
+    <div class="resize-handle rh-n"  data-dir="n"></div>
+    <div class="resize-handle rh-s"  data-dir="s"></div>
+    <div class="resize-handle rh-w"  data-dir="w"></div>
+    <div class="resize-handle rh-e"  data-dir="e"></div>
+    <div class="resize-handle rh-nw" data-dir="nw"></div>
+    <div class="resize-handle rh-ne" data-dir="ne"></div>
+    <div class="resize-handle rh-sw" data-dir="sw"></div>
+    <div class="resize-handle rh-se" data-dir="se"></div>
   `;
 
   win.querySelector(".wc-close").addEventListener("click", (e) => {
@@ -252,6 +273,7 @@ function buildWindowEl(id, def) {
 
   win.addEventListener("mousedown", () => focusWindow(id));
   makeDraggable(win, win.querySelector(".window-titlebar"));
+  makeResizable(win);
 
   return win;
 }
@@ -312,6 +334,67 @@ function makeDraggable(win, handle) {
   });
 }
 
+
+// -- Resize Logic -------------------------------------------------------------
+
+function makeResizable(win) {
+  const MIN_W = 200;
+  const MIN_H = 150;
+
+  win.querySelectorAll(".resize-handle").forEach((handle) => {
+    handle.addEventListener("mousedown", (e) => {
+      if (win.dataset.maximized === "true") return;
+      e.preventDefault();
+      e.stopPropagation();
+      focusWindow(win.dataset.id);
+
+      const dir    = handle.dataset.dir;
+      const startX = e.clientX;
+      const startY = e.clientY;
+      const startW = win.offsetWidth;
+      const startH = win.offsetHeight;
+      const startL = parseInt(win.style.left, 10) || win.offsetLeft;
+      const startT = parseInt(win.style.top,  10) || win.offsetTop;
+
+      // Keep the directional cursor locked while dragging fast
+      const prevCursor = document.body.style.cursor;
+      document.body.style.cursor = getComputedStyle(handle).cursor;
+
+      const onMove = (e) => {
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        let w = startW, h = startH, l = startL, t = startT;
+
+        if (dir.includes("e")) w = startW + dx;
+        if (dir.includes("s")) h = startH + dy;
+        if (dir.includes("w")) { w = startW - dx; l = startL + dx; }
+        if (dir.includes("n")) { h = startH - dy; t = startT + dy; }
+
+        // Clamp to minimum size (anchor the opposite edge)
+        if (w < MIN_W) { if (dir.includes("w")) l -= (MIN_W - w); w = MIN_W; }
+        if (h < MIN_H) { if (dir.includes("n")) t -= (MIN_H - h); h = MIN_H; }
+
+        // Keep the window on-screen (top/left edges)
+        if (l < 0) { w += l; l = 0; }
+        if (t < 0) { h += t; t = 0; }
+
+        win.style.width  = w + "px";
+        win.style.height = h + "px";
+        win.style.left   = l + "px";
+        win.style.top    = t + "px";
+      };
+
+      const onUp = () => {
+        document.removeEventListener("mousemove", onMove);
+        document.removeEventListener("mouseup",   onUp);
+        document.body.style.cursor = prevCursor;
+      };
+
+      document.addEventListener("mousemove", onMove);
+      document.addEventListener("mouseup",   onUp);
+    });
+  });
+}
 
 // ── Maximize ──────────────────────────────────────────────────────────────────
 
