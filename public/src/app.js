@@ -24,29 +24,29 @@ const WINDOWS = {
 
   projects: {
     title: "My Projects",
-    icon: "📁",
+    icon: '<img src="../images/directory_closed_cool-0.png" width="12px">',
     status: "5 objects",
     width: 540,
     height: 460,
     menu: ["File", "Edit", "View", "Favorites", "Help"],
     content: `
-      <h1>📁 My Projects</h1>
+      <h1><img src="../images/directory_closed_cool-0.png" width="20px"> My Projects</h1>
       <div class="project-card">
-        <h3>📄 Project Name</h3>
+        <h3><img src="../images/file_lines-0.png" width="15px"> Project Name</h3>
         <p>Short description of what this project does and the problem it solves.</p>
         <span class="tag">JavaScript</span>
         <span class="tag">HTML/CSS</span>
         &nbsp;<a href="#">View on GitHub →</a>
       </div>
       <div class="project-card">
-        <h3>📄 Another Project</h3>
+        <h3><img src="../images/file_lines-0.png" width="15px"> Another Project</h3>
         <p>Short description of what this project does and the problem it solves.</p>
         <span class="tag">Python</span>
         <span class="tag">Flask</span>
         &nbsp;<a href="#">View on GitHub →</a>
       </div>
       <div class="project-card">
-        <h3>📄 One More Project</h3>
+        <h3><img src="../images/file_lines-0.png" width="15px"> One More Project</h3>
         <p>Short description of what this project does and the problem it solves.</p>
         <span class="tag">React</span>
         <span class="tag">Node.js</span>
@@ -90,10 +90,10 @@ const WINDOWS = {
     height: 240,
     menu: ["File", "View", "Help"],
     content: `
-      <h1>📄 Resume</h1>
+      <h1><img src="../images/file_lines-0.png" width="20px"> Resume</h1>
       <p>Click below to open or download my full resume.</p>
       <a class="contact-link" href="resume.pdf" target="_blank">
-        <span class="contact-icon">📄</span>
+        <span class="contact-icon"><img src="../images/file_lines-0.png" width="15px"></span>
         Open Resume PDF
       </a>
       <p style="font-size:11px; color:#666; margin-top:8px;">Last updated: April 2026</p>
