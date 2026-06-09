@@ -465,7 +465,7 @@ function showShutdown() {
           <button class="wc-btn" onclick="document.getElementById('shutdown-overlay').classList.remove('visible')" style="width:14px;height:12px;font-size:9px">✕</button>
         </div>
         <div class="shutdown-body">
-          <span class="icon">💻</span>
+          <span class="icon"><img src="../images/monitor_black.png" width="32px"></span>
           <div>
             <p><strong>Are you sure you want to shut down?</strong></p>
             <p>Austin Schlutter OS v1.0</p>
