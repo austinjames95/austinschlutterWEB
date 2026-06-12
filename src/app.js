@@ -112,11 +112,11 @@ const WINDOWS = {
     content: `
       <h1><img src="../images/file_lines-0.png" width="20px"> Resume</h1>
       <p>Click below to open or download my full resume.</p>
-      <a class="contact-link" href="resume.pdf" target="_blank">
+      <a class="contact-link" href="2026RESUME2.pdf" target="href="2026RESUME2.pdf">
         <span class="contact-icon"><img src="../images/file_lines-0.png" width="15px"></span>
         Open Resume PDF
       </a>
-      <p style="font-size:11px; color:#666; margin-top:8px;">Last updated: April 2026</p>
+      <p style="font-size:11px; color:#666; margin-top:8px;">Last updated: June 2026</p>
     `,
   },
 
@@ -138,7 +138,7 @@ const WINDOWS = {
         <span class="contact-icon"><img src="../images/monitor_blue_grad-0.png" width=14px></span>
         github.com/AustinSchlutter
       </a>
-      <a class="contact-link" href="https://linkedin.com/in/yourprofile" target="www.linkedin.com/in/austinschlutter">
+      <a class="contact-link" href="www.linkedin.com/in/austinschlutter" target="www.linkedin.com/in/austinschlutter">
         <span class="contact-icon"><img src="../images/network_internet_pcs_installer-2.png" width=14px></span>
         linkedin.com/in/yourprofile
       </a>
