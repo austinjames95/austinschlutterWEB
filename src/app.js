@@ -3,13 +3,13 @@
 const WINDOWS = {
   about: {
     title: "About Me",
-    icon: '<img src="../images/msagent-3.png" width="12px">',
+    icon: '<img src="../images/newicon.png" width="12px">',
     status: "Austin Schlutter — Portfolio",
     width: 480,
     height: 360,
     menu: ["File", "Edit", "View", "Help"],
     content: `
-      <h1><img src="../images/msagent-3.png" width="20px"> About Me</h1>
+      <h1><img src="../images/newicon.png" width="20px"> About Me</h1>
       <p><strong>Austin Schlutter</strong> — An Electrical and Computer Engineering Junior at Rensselaer Polytechnic Institute</p>
       <p>
         Based out of Irvine CA, I have a strong passion for research, solving problems, and building. My hobbies include playing 
