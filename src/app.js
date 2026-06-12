@@ -64,7 +64,11 @@ const WINDOWS = {
       </div>
       <div class="project-card">
         <h3><img src="../images/file_lines-0.png" width="15px"> SimplyEwaste</h3>
-        <p>Short description of what this project does and the problem it solves.</p>
+        <p>
+          SimplyEwaste is a charity I started during the pandemic era with the aim to provide reliable technology to underserved communities in California.
+          I have been fortunate enough to donate to Warrior 4 Children, Project Self Suffifency, and Cristo Rey Orange County. Along with my 2 associates 
+          we were able to donate over $80,000 of technology.
+        </p>
         <div style=justify-content: center; > Note this project is no longer active</div>
         <span class="tag">Charity</span>
         <span class="tag">Leadership</span>
