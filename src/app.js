@@ -54,7 +54,8 @@ const WINDOWS = {
         <h3><img src="../images/file_lines-0.png" width="15px"> tasteCampus</h3>
         <p>
           A platform for prospective families to connect with current students to gain unbiased insight and first hand experience
-          about universities, currently 
+          about universities, currently we are in talks with a univeristy to launch a pilot program to see how our service is recieved by 
+          families and students. Stay Tuned!
         </p>
         <span class="tag">Javascript</span>
         <span class="tag">HTML/CSS</span>
