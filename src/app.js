@@ -138,9 +138,9 @@ const WINDOWS = {
         <span class="contact-icon"><img src="../images/monitor_blue_grad-0.png" width=14px></span>
         github.com/AustinSchlutter
       </a>
-      <a class="contact-link" href="www.linkedin.com/in/austinschlutter" target="www.linkedin.com/in/austinschlutter">
+      <a class="contact-link" href="www.linkedin.com/in/austinschlutter">
         <span class="contact-icon"><img src="../images/network_internet_pcs_installer-2.png" width=14px></span>
-        linkedin.com/in/yourprofile
+        www.linkedin.com/in/austinschlutter
       </a>
     `,
   },
