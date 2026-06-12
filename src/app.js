@@ -16,7 +16,7 @@ const WINDOWS = {
         music (Bass / Electric Guitar), hiking, and boxing.
       </p>
       <h2>Education</h2>
-      <p>[Rensselaer Polytechnic Institute, Electrical Engineering + Computer Systems Engineering, 2028</p>
+      <p>Rensselaer Polytechnic Institute, Electrical Engineering + Computer Systems Engineering, 2028</p>
       <h2>Experience</h2>
       <p>
         Last year I took a position at City of Hope Cancer Research Center in Duarte California working on a research project analyzing
