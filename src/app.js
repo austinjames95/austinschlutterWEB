@@ -1,5 +1,4 @@
 import { getTopAlbums, getTopArtists, getRecentTracks } from './lastfm.js'
-
 // ── Window Definitions ────────────────────────────────────────────────────────
 
 const WINDOWS = {
@@ -27,7 +26,10 @@ const WINDOWS = {
         As for my more recent projects, please check out the <strong>Projects</strong> page for more information
       </p>
       <h2>Interests</h2>
-      <p>Some of my tech interests include MedTech, Backend Development, Web Development, and Data Analysis</p>
+      <p>
+        Some of my tech interests include MedTech, Backend Development, Web Development, and Data Analysis. Most importantly I like building physical hardware, 
+        and physical circuits. 
+      </p>
     `,
   },
 
@@ -162,6 +164,7 @@ const WINDOWS = {
     // The content is a skeleton — the real data gets injected by initMusicWindow()
     content: `
       <h1><img src="../images/spotifyIcon.png" width="18px"> Music Stats</h1>
+      <div id="now-playing-area"></div>
       <div class="music-tabs" style="justify-content: center">
         <button class="music-tab active" data-tab="albums">Top Albums</button>
         <button class="music-tab" data-tab="artists">Top Artists</button>
@@ -585,6 +588,16 @@ async function initMusicWindow(winEl) {
     grid.innerHTML = '<p class="music-loading">Loading...</p>'
 
     try {
+      const res = await fetch('/.netlify/functions/spotify')
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      const nowPlaying = await res.json()
+      document.getElementById('now-playing-area').innerHTML = renderNowPlaying(nowPlaying)
+    } catch (e) {
+      document.getElementById('now-playing-area').innerHTML = ''
+      console.error('Spotify error:', e)
+    }
+
+    try {
       if (activeTab === 'albums') {
         const albums = await getTopAlbums(activePeriod, 9)
         grid.innerHTML = renderAlbumGrid(albums)
@@ -624,8 +637,25 @@ async function initMusicWindow(winEl) {
   loadData()
 }
 
+
 // ── Render Helpers ────────────────────────────────────────────────────────────
 // Each takes a Last.fm array and returns an HTML string.
+
+function renderNowPlaying(data) {
+  if (!data.isPlaying) {
+    return `<p class="music-loading">Not currently playing anything.</p>`
+  }
+  return `
+    <div class="now-playing-card">
+      <img src="${data.albumImageUrl}" alt="${data.album}" class="album-art">
+      <div class="now-playing-info">
+        <div class="now-playing-title">${data.title}</div>
+        <div class="now-playing-artist">${data.artist}</div>
+        <div class="now-playing-album">${data.album}</div>
+      </div>
+    </div>
+  `
+}
 
 function renderAlbumGrid(albums) {
   if (!albums || albums.length === 0) return '<p class="music-loading">No data found.</p>'

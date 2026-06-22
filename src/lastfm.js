@@ -1,6 +1,3 @@
-// Last.fm API helper
-// All Last.fm read endpoints are public — just an API key, no OAuth needed.
-
 const API_KEY = import.meta.env.VITE_LASTFM_API
 const USERNAME = import.meta.env.VITE_LASTFM_USERNAME
 const BASE_URL = 'https://ws.audioscrobbler.com/2.0/'
