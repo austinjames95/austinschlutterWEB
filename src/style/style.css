@@ -709,3 +709,137 @@ button,
   border-right:  2px solid var(--white);
   border-bottom: 2px solid var(--white);
 }
+
+/* ── Music / Last.fm Window ───────────────────────────────── */
+.music-tabs,
+.music-periods {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 6px;
+}
+
+.music-tab,
+.music-period {
+  font-family: var(--font);
+  font-size: 11px;
+  padding: 3px 10px;
+  background: var(--gray);
+  cursor: pointer;
+  border-top:    1px solid var(--white);
+  border-left:   1px solid var(--white);
+  border-right:  1px solid var(--darker);
+  border-bottom: 1px solid var(--darker);
+}
+
+.music-tab.active,
+.music-period.active {
+  background: #000080;
+  color: var(--white);
+  border-top:    1px solid var(--darker);
+  border-left:   1px solid var(--darker);
+  border-right:  1px solid var(--white);
+  border-bottom: 1px solid var(--white);
+}
+
+.music-loading {
+  font-size: 11px;
+  color: var(--dark-gray);
+  padding: 8px 0;
+}
+
+/* Album grid — 3 columns */
+.album-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.album-card {
+  display: flex;
+  flex-direction: column;
+  font-size: 10px;
+  gap: 3px;
+}
+
+.album-art {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-top:    1px solid var(--darker);
+  border-left:   1px solid var(--darker);
+  border-right:  1px solid var(--white);
+  border-bottom: 1px solid var(--white);
+  display: block;
+}
+
+.album-placeholder {
+  background: var(--dark-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 24px;
+}
+
+.album-title  { font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.album-artist { color: var(--dark-gray); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.album-plays  { color: var(--darker); }
+
+/* Artist ranked list */
+.artist-list { display: flex; flex-direction: column; gap: 5px; }
+
+.artist-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+}
+
+.artist-rank  { width: 16px; text-align: right; color: var(--dark-gray); flex-shrink: 0; }
+.artist-name  { width: 120px; flex-shrink: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.artist-plays { width: 60px; text-align: right; color: var(--darker); flex-shrink: 0; }
+
+.artist-bar-wrap {
+  flex: 1;
+  height: 10px;
+  background: var(--gray);
+  border-top:    1px solid var(--darker);
+  border-left:   1px solid var(--darker);
+  border-right:  1px solid var(--white);
+  border-bottom: 1px solid var(--white);
+}
+
+.artist-bar {
+  height: 100%;
+  background: #000080;
+}
+
+/* Recent tracks list */
+.recent-list { display: flex; flex-direction: column; gap: 4px; }
+
+.recent-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  padding: 3px;
+}
+
+.recent-row.now-playing { background: #000080; color: var(--white); }
+
+.recent-art {
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border-top:    1px solid var(--darker);
+  border-left:   1px solid var(--darker);
+  border-right:  1px solid var(--white);
+  border-bottom: 1px solid var(--white);
+}
+
+.recent-info  { flex: 1; overflow: hidden; }
+.recent-track { font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.recent-artist { color: var(--dark-gray); }
+.recent-row.now-playing .recent-artist { color: #aad4ff; }
+.recent-when  { font-size: 10px; color: var(--dark-gray); flex-shrink: 0; text-align: right; }

@@ -1,3 +1,4 @@
+import { getTopAlbums, getTopArtists, getRecentTracks } from './lastfm.js'
 // ── Window Definitions ────────────────────────────────────────────────────────
 
 const WINDOWS = {
@@ -25,7 +26,10 @@ const WINDOWS = {
         As for my more recent projects, please check out the <strong>Projects</strong> page for more information
       </p>
       <h2>Interests</h2>
-      <p>Some of my tech interests include MedTech, Backend Development, Web Development, and Data Analysis</p>
+      <p>
+        Some of my tech interests include MedTech, Backend Development, Web Development, and Data Analysis. Most importantly I like building physical hardware, 
+        and physical circuits. 
+      </p>
     `,
   },
 
@@ -149,6 +153,33 @@ const WINDOWS = {
       </a>
     `,
   },
+
+  music: {
+    title: "Music",
+    icon: '<img src="../images/spotifyIcon.png" width="12px">',
+    status: "Loading...",
+    width: 520,
+    height: 460,
+    menu: ["File", "View", "Help"],
+    // The content is a skeleton — the real data gets injected by initMusicWindow()
+    content: `
+      <h1><img src="../images/spotifyIcon.png" width="18px"> Music Stats</h1>
+      <div id="now-playing-area"></div>
+      <div class="music-tabs" style="justify-content: center">
+        <button class="music-tab active" data-tab="albums">Top Albums</button>
+        <button class="music-tab" data-tab="artists">Top Artists</button>
+        <button class="music-tab" data-tab="recent">Recent Tracks</button>
+      </div>
+      <div class="music-periods" style="justify-content: center">
+        <button class="music-period active" data-period="7day">7 days</button>
+        <button class="music-period" data-period="1month">1 month</button>
+        <button class="music-period" data-period="3month">3 months</button>
+      </div>
+      <div id="music-grid" class="music-grid">
+        <p class="music-loading">Loading...</p>
+      </div>
+    `,
+  },
 };
 
 
@@ -193,6 +224,9 @@ function openWindow(id) {
   el.style.height = def.height + "px";
 
   document.getElementById("windows-container").appendChild(el);
+
+  // After the window is in the DOM, run any window-specific init logic
+  if (id === 'music') initMusicWindow(el)
 
   // Taskbar button
   const btn = buildTaskbarBtn(id, def);
@@ -487,6 +521,7 @@ function showShutdown() {
   overlay.classList.add("visible");
 }
 
+document.getElementById("start-btn").addEventListener("click", toggleStartMenu);
 document.getElementById("shutdown-btn").addEventListener("click", showShutdown);
 
 
@@ -533,6 +568,153 @@ document.getElementById("desktop").addEventListener("click", () => {
 document.querySelectorAll(".menu-item[data-window]").forEach((el) => {
   el.addEventListener("click", () => openWindow(el.dataset.window));
 });
+
+
+// ── Music Window Logic ────────────────────────────────────────────────────────
+// Runs once after the music window's HTML is in the DOM.
+// Wires up tab/period buttons and loads the initial data.
+
+async function initMusicWindow(winEl) {
+  const grid = winEl.querySelector('#music-grid')
+  const tabs = winEl.querySelectorAll('.music-tab')
+  const periods = winEl.querySelectorAll('.music-period')
+
+  let activeTab = 'albums'
+  let activePeriod = '7day'
+
+  // Inner async function — closes over activeTab/activePeriod so it always
+  // uses the current values when called after a button click.
+  async function loadData() {
+    grid.innerHTML = '<p class="music-loading">Loading...</p>'
+
+    try {
+      const res = await fetch('/.netlify/functions/spotify')
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      const nowPlaying = await res.json()
+      document.getElementById('now-playing-area').innerHTML = renderNowPlaying(nowPlaying)
+    } catch (e) {
+      document.getElementById('now-playing-area').innerHTML = ''
+      console.error('Spotify error:', e)
+    }
+
+    try {
+      if (activeTab === 'albums') {
+        const albums = await getTopAlbums(activePeriod, 9)
+        grid.innerHTML = renderAlbumGrid(albums)
+      } else if (activeTab === 'artists') {
+        const artists = await getTopArtists(activePeriod, 9)
+        grid.innerHTML = renderArtistList(artists)
+      } else {
+        const tracks = await getRecentTracks(10)
+        grid.innerHTML = renderRecentTracks(tracks)
+      }
+    } catch (err) {
+      grid.innerHTML = '<p class="music-loading">Could not load data. Check your API key and username in lastfm.js</p>'
+      console.error('Last.fm error:', err)
+    }
+  }
+
+  // Wire up tab buttons: mark clicked one active, update state, reload
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabs.forEach(b => b.classList.remove('active'))
+      btn.classList.add('active')
+      activeTab = btn.dataset.tab
+      loadData()
+    })
+  })
+
+  // Same pattern for period buttons
+  periods.forEach(btn => {
+    btn.addEventListener('click', () => {
+      periods.forEach(b => b.classList.remove('active'))
+      btn.classList.add('active')
+      activePeriod = btn.dataset.period
+      loadData()
+    })
+  })
+
+  loadData()
+}
+
+
+// ── Render Helpers ────────────────────────────────────────────────────────────
+// Each takes a Last.fm array and returns an HTML string.
+
+function renderNowPlaying(data) {
+  if (!data.isPlaying) {
+    return `<p class="music-loading">Not currently playing anything.</p>`
+  }
+  return `
+    <div class="now-playing-card">
+      <img src="${data.albumImageUrl}" alt="${data.album}" class="album-art">
+      <div class="now-playing-info">
+        <div class="now-playing-title">${data.title}</div>
+        <div class="now-playing-artist">${data.artist}</div>
+        <div class="now-playing-album">${data.album}</div>
+      </div>
+    </div>
+  `
+}
+
+function renderAlbumGrid(albums) {
+  if (!albums || albums.length === 0) return '<p class="music-loading">No data found.</p>'
+
+  // map() transforms each album object into an HTML card string,
+  // join('') stitches them together with no separator.
+  return `<div class="album-grid">${albums.map(album => {
+    // Last.fm returns 4 image sizes; index 2 (~174px) fits our grid best
+    const img = album.image?.[2]?.['#text'] || ''
+    const plays = Number(album.playcount).toLocaleString()
+    return `
+      <div class="album-card">
+        ${img ? `<img src="${img}" alt="${album.name}" class="album-art">` : '<div class="album-art album-placeholder">?</div>'}
+        <div class="album-info">
+          <div class="album-title">${album.name}</div>
+          <div class="album-artist">${album.artist.name}</div>
+          <div class="album-plays">${plays} plays</div>
+        </div>
+      </div>`
+  }).join('')}</div>`
+}
+
+function renderArtistList(artists) {
+  if (!artists || artists.length === 0) return '<p class="music-loading">No data found.</p>'
+
+  const max = Number(artists[0].playcount) // top artist = 100% bar width
+  return `<div class="artist-list">${artists.map((a, i) => {
+    const plays = Number(a.playcount)
+    const pct = Math.round((plays / max) * 100)
+    return `
+      <div class="artist-row">
+        <span class="artist-rank">${i + 1}</span>
+        <span class="artist-name">${a.name}</span>
+        <div class="artist-bar-wrap">
+          <div class="artist-bar" style="width:${pct}%"></div>
+        </div>
+        <span class="artist-plays">${plays.toLocaleString()}</span>
+      </div>`
+  }).join('')}</div>`
+}
+
+function renderRecentTracks(tracks) {
+  if (!tracks || tracks.length === 0) return '<p class="music-loading">No data found.</p>'
+
+  return `<div class="recent-list">${tracks.map(t => {
+    // Last.fm marks a currently-scrobbling track with @attr.nowplaying = 'true'
+    const nowPlaying = t['@attr']?.nowplaying === 'true'
+    const when = nowPlaying ? '▶ Now playing' : (t.date?.['#text'] || '')
+    return `
+      <div class="recent-row ${nowPlaying ? 'now-playing' : ''}">
+        <img src="${t.image?.[1]?.['#text'] || ''}" class="recent-art" alt="">
+        <div class="recent-info">
+          <div class="recent-track">${t.name}</div>
+          <div class="recent-artist">${t.artist['#text']}</div>
+        </div>
+        <div class="recent-when">${when}</div>
+      </div>`
+  }).join('')}</div>`
+}
 
 
 // ── Open About on load ────────────────────────────────────────────────────────
