@@ -1,5 +1,3 @@
-const API_KEY = import.meta.env.VITE_LASTFM_API
-const USERNAME = import.meta.env.VITE_LASTFM_USERNAME
 const BASE_URL = 'https://ws.audioscrobbler.com/2.0/'
 
 // buildUrl takes a method name and extra params, returns a full API URL.
