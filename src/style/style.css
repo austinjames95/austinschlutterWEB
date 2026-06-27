@@ -2,7 +2,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --desktop-bg: url("../../images/19201080.png");
+  --desktop-bg: url("/images/19201080.png");
   --gray:        #c0c0c0;
   --dark-gray:   #808080;
   --darker:      #404040;
@@ -15,12 +15,12 @@
 
   /* ── Custom Cursors ──────────────────────────────────────── */
   /* Paths are relative to this stylesheet (public/src/style/). */
-  --cur-default: url("../../cursor/Cursor.cur"), auto;
-  --cur-click:   url("../../cursor/Cursor_click.cur"), pointer;
-  --cur-ew:      url("../../cursor/Cursor_resize_hor.cur"), ew-resize;
-  --cur-ns:      url("../../cursor/Cursor_resize_vert.cur"), ns-resize;
-  --cur-nwse:    url("../../cursor/Cursor_top_left_bot_right.cur"), nwse-resize;
-  --cur-nesw:    url("../../cursor/Cursor_top_right_bot_left.cur"), nesw-resize;
+  --cur-default: url("/cursor/Cursor.cur"), auto;
+  --cur-click:   url("/cursor/Cursor_click.cur"), pointer;
+  --cur-ew:      url("/cursor/Cursor_resize_hor.cur"), ew-resize;
+  --cur-ns:      url("/cursor/Cursor_resize_vert.cur"), ns-resize;
+  --cur-nwse:    url("/cursor/Cursor_top_left_bot_right.cur"), nwse-resize;
+  --cur-nesw:    url("/cursor/Cursor_top_right_bot_left.cur"), nesw-resize;
 }
 
 body {

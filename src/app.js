@@ -1,16 +1,22 @@
 import { getTopAlbums, getTopArtists, getRecentTracks } from './lastfm.js'
+
+// True on phones/tablets (coarse pointer or touch events available).
+// Used to switch desktop icons from double-click to single-tap.
+const isTouch =
+  window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window;
+
 // ── Window Definitions ────────────────────────────────────────────────────────
 
 const WINDOWS = {
   about: {
     title: "About Me",
-    icon: '<img src="../images/newicon.png" width="12px">',
+    icon: '<img src="/images/newicon.png" width="12px">',
     status: "Austin Schlutter — Portfolio",
     width: 480,
     height: 360,
     menu: ["File", "Edit", "View", "Help"],
     content: `
-      <h1><img src="../images/newicon.png" width="20px"> About Me</h1>
+      <h1><img src="/images/newicon.png" width="20px"> About Me</h1>
       <p><strong>Austin Schlutter</strong> — An Electrical and Computer Engineering Junior at Rensselaer Polytechnic Institute</p>
       <p>
         Based out of Irvine CA, I have a strong passion for research, solving problems, and building. My hobbies include playing 
@@ -35,15 +41,15 @@ const WINDOWS = {
 
   projects: {
     title: "My Projects",
-    icon: '<img src="../images/directory_closed_cool-0.png" width="12px">',
+    icon: '<img src="/images/directory_closed_cool-0.png" width="12px">',
     status: "5 objects",
     width: 540,
     height: 460,
     menu: ["File", "Edit", "View", "Favorites", "Help"],
     content: `
-      <h1><img src="../images/directory_closed_cool-0.png" width="20px"> My Projects</h1>
+      <h1><img src="/images/directory_closed_cool-0.png" width="20px"> My Projects</h1>
       <div class="project-card">
-        <h3><img src="../images/file_lines-0.png" width="15px"> EIT-tek</h3>
+        <h3><img src="/images/file_lines-0.png" width="15px"> EIT-tek</h3>
         <p>
           A company I started researching Electrical Impedance Tomography, an alternative form of medical imaging technology.
           By utilizing my electrical engineering background I plan to build a device catered towards atheletes that can give athletic
@@ -55,7 +61,7 @@ const WINDOWS = {
         &nbsp;<a href="https://www.eit-tek.com">View Website →</a>
       </div>
       <div class="project-card">
-        <h3><img src="../images/file_lines-0.png" width="15px"> tasteCampus</h3>
+        <h3><img src="/images/file_lines-0.png" width="15px"> tasteCampus</h3>
         <p>
           A platform for prospective families to connect with current students to gain unbiased insight and first hand experience
           about universities, currently we are in talks with a univeristy to launch a pilot program to see how our service is recieved by 
@@ -68,7 +74,7 @@ const WINDOWS = {
         &nbsp;<a href="https://www.tastecampus.com">View Website →</a>
       </div>
       <div class="project-card">
-        <h3><img src="../images/file_lines-0.png" width="15px"> SimplyEwaste</h3>
+        <h3><img src="/images/file_lines-0.png" width="15px"> SimplyEwaste</h3>
         <p>
           SimplyEwaste is a charity I started during the pandemic era with the aim to provide reliable technology to underserved communities in California.
           I have been fortunate enough to donate to Warrior 4 Children, Project Self Suffifency, and Cristo Rey Orange County. Along with my 2 associates 
@@ -86,7 +92,7 @@ const WINDOWS = {
 
   skills: {
     title: "Skills.txt — Notepad",
-    icon: '<img src="../images/chip_ramdrive-2.png" width="12px">',
+    icon: '<img src="/images/chip_ramdrive-2.png" width="12px">',
     status: "Ready",
     width: 400,
     height: 340,
@@ -113,16 +119,16 @@ const WINDOWS = {
 
   resume: {
     title: "Resume.pdf",
-    icon: '<img src="../images/file_lines-0.png" width="12px">',
+    icon: '<img src="/images/file_lines-0.png" width="12px">',
     status: "1 document",
     width: 380,
     height: 240,
     menu: ["File", "View", "Help"],
     content: `
-      <h1><img src="../images/file_lines-0.png" width="20px"> Resume</h1>
+      <h1><img src="/images/file_lines-0.png" width="20px"> Resume</h1>
       <p>Click below to open or download my full resume.</p>
-      <a class="contact-link" href="2026RESUME2.pdf" target="href="2026RESUME2.pdf">
-        <span class="contact-icon"><img src="../images/file_lines-0.png" width="15px"></span>
+      <a class="contact-link" href="/2026RESUME2.pdf" target="href="/2026RESUME2.pdf">
+        <span class="contact-icon"><img src="/images/file_lines-0.png" width="15px"></span>
         Open Resume PDF
       </a>
       <p style="font-size:11px; color:#666; margin-top:8px;">Last updated: June 2026</p>
@@ -131,24 +137,24 @@ const WINDOWS = {
 
   contact: {
     title: "Contact",
-    icon: '<img src="../images/envelope_closed-0.png" width=14px>',
+    icon: '<img src="/images/envelope_closed-0.png" width=14px>',
     status: "3 items",
     width: 400,
     height: 300,
     menu: ["File", "Edit", "Help"],
     content: `
-      <h1><img src="../images/envelope_closed-0.png" width=15px> Contact</h1>
+      <h1><img src="/images/envelope_closed-0.png" width=15px> Contact</h1>
       <p>Feel free to reach out! I'd love to connect!</p>
       <a class="contact-link" href="mailto:austinschlutter@gmail.com">
-        <span class="contact-icon"><img src="../images/modem-4.png" width=14px></span>
+        <span class="contact-icon"><img src="/images/modem-4.png" width=14px></span>
         austinschlutter@gmail.com
       </a>
       <a class="contact-link" href="https://github.com/austinjames95" target="https://github.com/austinjames95">
-        <span class="contact-icon"><img src="../images/monitor_blue_grad-0.png" width=14px></span>
+        <span class="contact-icon"><img src="/images/monitor_blue_grad-0.png" width=14px></span>
         github.com/AustinSchlutter
       </a>
       <a class="contact-link" href="www.linkedin.com/in/austinschlutter">
-        <span class="contact-icon"><img src="../images/network_internet_pcs_installer-2.png" width=14px></span>
+        <span class="contact-icon"><img src="/images/network_internet_pcs_installer-2.png" width=14px></span>
         www.linkedin.com/in/austinschlutter
       </a>
     `,
@@ -156,14 +162,14 @@ const WINDOWS = {
 
   music: {
     title: "Music",
-    icon: '<img src="../images/spotifyIcon.png" width="12px">',
+    icon: '<img src="/images/spotifyIcon.png" width="12px">',
     status: "Loading...",
     width: 520,
     height: 460,
     menu: ["File", "View", "Help"],
     // The content is a skeleton — the real data gets injected by initMusicWindow()
     content: `
-      <h1><img src="../images/spotifyIcon.png" width="18px"> Music Stats</h1>
+      <h1><img src="/images/spotifyIcon.png" width="18px"> Music Stats</h1>
       <div id="now-playing-area"></div>
       <div class="music-tabs" style="justify-content: center">
         <button class="music-tab active" data-tab="albums">Top Albums</button>
@@ -213,15 +219,27 @@ function openWindow(id) {
 
   const el = buildWindowEl(id, def);
 
-  // Position: slightly randomized center
+  // Position the window
   const vw = window.innerWidth;
   const vh = window.innerHeight;
-  const left = Math.max(10, (vw - def.width) / 2 + (Math.random() - 0.5) * 160);
-  const top  = Math.max(4,  (vh - def.height - 28) / 2 + (Math.random() - 0.5) * 100);
-  el.style.left   = Math.round(left) + "px";
-  el.style.top    = Math.round(top)  + "px";
-  el.style.width  = def.width  + "px";
-  el.style.height = def.height + "px";
+
+  if (vw <= 700) {
+    // Phone: open nearly full-screen so the window always fits and is usable
+    const w = Math.min(def.width, vw - 8);
+    const h = Math.min(def.height, vh - 28 - 12);
+    el.style.left   = Math.round((vw - w) / 2) + "px";
+    el.style.top    = "6px";
+    el.style.width  = w + "px";
+    el.style.height = h + "px";
+  } else {
+    // Desktop: slightly randomized center
+    const left = Math.max(10, (vw - def.width) / 2 + (Math.random() - 0.5) * 160);
+    const top  = Math.max(4,  (vh - def.height - 28) / 2 + (Math.random() - 0.5) * 100);
+    el.style.left   = Math.round(left) + "px";
+    el.style.top    = Math.round(top)  + "px";
+    el.style.width  = def.width  + "px";
+    el.style.height = def.height + "px";
+  }
 
   document.getElementById("windows-container").appendChild(el);
 
@@ -353,7 +371,7 @@ function buildTaskbarBtn(id, def) {
 function makeDraggable(win, handle) {
   let startX, startY, startLeft, startTop;
 
-  handle.addEventListener("mousedown", (e) => {
+  handle.addEventListener("pointerdown", (e) => {
     if (e.target.classList.contains("wc-btn")) return;
     if (win.dataset.maximized === "true") return;
     e.preventDefault();
@@ -371,12 +389,12 @@ function makeDraggable(win, handle) {
     };
 
     const onUp = () => {
-      document.removeEventListener("mousemove", onMove);
-      document.removeEventListener("mouseup",   onUp);
+      document.removeEventListener("pointermove", onMove);
+      document.removeEventListener("pointerup",   onUp);
     };
 
-    document.addEventListener("mousemove", onMove);
-    document.addEventListener("mouseup",   onUp);
+    document.addEventListener("pointermove", onMove);
+    document.addEventListener("pointerup",   onUp);
   });
 }
 
@@ -388,7 +406,7 @@ function makeResizable(win) {
   const MIN_H = 150;
 
   win.querySelectorAll(".resize-handle").forEach((handle) => {
-    handle.addEventListener("mousedown", (e) => {
+    handle.addEventListener("pointerdown", (e) => {
       if (win.dataset.maximized === "true") return;
       e.preventDefault();
       e.stopPropagation();
@@ -431,13 +449,13 @@ function makeResizable(win) {
       };
 
       const onUp = () => {
-        document.removeEventListener("mousemove", onMove);
-        document.removeEventListener("mouseup",   onUp);
+        document.removeEventListener("pointermove", onMove);
+        document.removeEventListener("pointerup",   onUp);
         document.body.style.cursor = prevCursor;
       };
 
-      document.addEventListener("mousemove", onMove);
-      document.addEventListener("mouseup",   onUp);
+      document.addEventListener("pointermove", onMove);
+      document.addEventListener("pointerup",   onUp);
     });
   });
 }
@@ -504,7 +522,7 @@ function showShutdown() {
           <button class="wc-btn" onclick="document.getElementById('shutdown-overlay').classList.remove('visible')" style="width:14px;height:12px;font-size:9px">✕</button>
         </div>
         <div class="shutdown-body">
-          <span class="icon"><img src="../images/monitor_black.png" width="32px"></span>
+          <span class="icon"><img src="/images/monitor_black.png" width="32px"></span>
           <div>
             <p><strong>Are you sure you want to shut down?</strong></p>
             <p>Austin Schlutter OS v1.0</p>
@@ -546,6 +564,11 @@ document.querySelectorAll("[data-window]").forEach((el) => {
   el.addEventListener("dblclick", () => openWindow(el.dataset.window));
   // Desktop icons open on double-click; start menu items on single click
   if (el.classList.contains("start-item")) {
+    el.addEventListener("click", () => openWindow(el.dataset.window));
+  }
+  // On touch devices there is no reliable double-click, so a single tap
+  // opens desktop icons too.
+  if (isTouch && el.classList.contains("desktop-icon")) {
     el.addEventListener("click", () => openWindow(el.dataset.window));
   }
 });
