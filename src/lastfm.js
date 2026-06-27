@@ -1,3 +1,8 @@
+// Injected at build time by Vite from .env (local) or Netlify env vars (prod).
+// Note: a Last.fm *read* key is sent in plaintext on every request anyway, so
+// this is still visible in the shipped bundle — .env just keeps it out of git.
+const API_KEY = import.meta.env.VITE_LASTFM_API
+const USERNAME = import.meta.env.VITE_LASTFM_USERNAME
 const BASE_URL = 'https://ws.audioscrobbler.com/2.0/'
 
 // buildUrl takes a method name and extra params, returns a full API URL.
