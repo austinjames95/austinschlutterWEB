@@ -666,10 +666,10 @@ async function initMusicWindow(winEl) {
 
 function renderNowPlaying(data) {
   if (!data.isPlaying) {
-    return `<p class="music-loading">Not currently playing anything.</p>`
+    return `<p class="music-loading" style="justify-content: center">Not currently playing anything.</p>`
   }
   return `
-    <div class="now-playing-card">
+    <div class="now-playing-card" style="justify-content: center">
       <img src="${data.albumImageUrl}" alt="${data.album}" class="album-art">
       <div class="now-playing-info">
         <div class="now-playing-title">${data.title}</div>
