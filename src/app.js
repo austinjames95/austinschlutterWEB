@@ -127,7 +127,7 @@ const WINDOWS = {
     content: `
       <h1><img src="/images/file_lines-0.png" width="20px"> Resume</h1>
       <p>Click below to open or download my full resume.</p>
-      <a class="contact-link" href="/2026RESUME2.pdf" target="href="/2026RESUME2.pdf">
+      <a class="contact-link" href="/2026RESUME3.pdf" target="href="/2026RESUME3.pdf">
         <span class="contact-icon"><img src="/images/file_lines-0.png" width="15px"></span>
         Open Resume PDF
       </a>
